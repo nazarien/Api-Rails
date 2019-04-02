@@ -2,24 +2,19 @@ class Api::V1::UserArticlesController < ApplicationController
   def index
     @saved_aritcles = current_user.favorite_articles
 
-    render json: @saved_aritcles, status: :success
+    render json: @saved_aritcles, status: 200
   end
 
   def create
     @favorite_article = current_user.user_articles.new(article_id: find_article.id)
-    if @favorite_article.save
-      render json: @favorite_article, status: :success
-    else
-			render json: @favorite_article.errors, status: :unprocessable_entity
-    end
+    authorize @favorite_article
+    @favorite_article.save
+    
   end
 
   def destroy
-    if current_user.favorite_articles.delete(find_article)
-			head(:success)
-		else
-			render json: @article.errors, status: :unprocessable_entity
-		end
+    authorize current_user
+    current_user.favorite_articles.delete(find_article)
   end
 
   private

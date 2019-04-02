@@ -3,16 +3,20 @@ class Api::V1::CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
+    authorize comment
+
     comment.destroy
-    render json: comment, status: :success
+    render json: comment, status: 200
   end
   
   def create
     comment = Comment.new(comment_params)
+    authorize comment
+
     if comment.save
-      render json: comment, status: :success
+      render json: comment, status: 200
     else
-      render json: comment, status: :unprocessable_entity
+      render json: comment, status: 500
     end
   end
 
