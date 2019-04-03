@@ -6,7 +6,7 @@ class Api::V1::CommentsController < ApplicationController
     authorize comment
 
     comment.destroy
-    render json: comment, status: 200
+    render json: comment, status: 204
   end
   
   def create
@@ -14,9 +14,9 @@ class Api::V1::CommentsController < ApplicationController
     authorize comment
 
     if comment.save
-      render json: comment, status: 200
+      render json: comment, status: 201
     else
-      render json: comment, status: 500
+      render json: comment, status: 422
     end
   end
 

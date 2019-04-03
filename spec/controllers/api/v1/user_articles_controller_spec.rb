@@ -17,14 +17,14 @@ RSpec.describe Api::V1::UserArticlesController, type: :controller do
 
   describe "GET #create" do
     it "returns http success" do
-      get :create, params: { id: @article.id }
+      post :create, params: { id: @article.id }
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #destroy" do
     it "returns http success" do
-      get :destroy, params: { id: @article.id }
+      delete :destroy, params: { id: @article.id }
       expect(response).to have_http_status(:success)
     end
   end

@@ -9,7 +9,8 @@ class Api::V1::UserArticlesController < ApplicationController
     @favorite_article = current_user.user_articles.new(article_id: find_article.id)
     authorize @favorite_article
     @favorite_article.save
-    
+
+    render json: @favorite_article, status: 200
   end
 
   def destroy

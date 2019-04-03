@@ -14,4 +14,7 @@ FactoryBot.define do
       end
     end
   end
+  factory :role, parent: :user do
+    role { 'user' }
+  end
 end

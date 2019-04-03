@@ -17,12 +17,12 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "GET #show" do
     it "returns http success on show" do
-      user = create(:user, :with_articles)
+      user = create(:user)
       auth_headers = user.create_new_auth_token
       setting_headers(auth_headers)
       get :show, params: { id: user.id }
       hash_body = JSON.parse(response.body)
-      expect(hash_body["id"]).to eq(User.last.id - 2)
+      expect(hash_body["id"]).to eq(User.last.id)
     end
   end
 
